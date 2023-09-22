@@ -141,32 +141,8 @@ const Selling = ({ navigation }) => {
 
   return (
     <View style={[styles.container]}>
-    <View style={styles.filterContainer}>
-        <View style={styles.searchContainer}>
-          <Icon name="magnify" size={24} color="#999" style={styles.searchIcon} />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search..."
-            value={searchQuery}
-            onChangeText={text => {
-              console.log("Search Query:", text); // Check search query changes
-              setSearchQuery(text);
-            }}
-          />
-        </View>
-        <TouchableOpacity style={styles.filterIconContainer} onPress={() => {
-
-
-
-
-
-
-        }}>
-          <Icon name="filter" size={24} color="#999" style={styles.filterIcon} />
-        </TouchableOpacity>
-      </View>
     <FlatList
-      data={filteredItems}
+      data={rows}
       renderItem={renderRow}
       keyExtractor={(item, index) => index.toString()}
     />
