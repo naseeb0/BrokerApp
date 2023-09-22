@@ -260,6 +260,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5F5F5",
     borderRadius: 8,
     paddingLeft: 8,
+    marginBottom: 8,
   },
   searchIcon: {
     marginRight: 8,
