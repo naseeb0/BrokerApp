@@ -93,7 +93,7 @@ const eventsData = [
 const EventScreen = () => {
   return (
     
-    <View style={[styles.container,{marginTop:30}]}>
+    <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
       {eventsData.map((event, index) => (
         <EventCard key={index} event={event} />
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f5f5f5',
       },
       scrollContainer: {
-        paddingTop: 30, // Add top padding/margin
+        // Add top padding/margin
         paddingHorizontal: 6, // Add horizontal padding
         alignItems: 'center',
       },

@@ -45,7 +45,7 @@ const News = () => {
   ];
 
   return (
-    <View style={[styles.container, {marginTop:30}]}>
+    <View style={styles.container}>
       <ScrollView>
         {newsList.map((news, index) => (
           <View key={index} style={styles.card}>
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
-    padding: 20,
+    padding: 10,
   },
   card: {
     marginBottom: 20,

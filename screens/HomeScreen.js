@@ -1,7 +1,7 @@
-
-import React,{useEffect, useState} from 'react';
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text, StyleSheet, TextInput, FlatList } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import EventsScreen from './EventsScreen';
 import RecommendationScreen from './RecommendationScreen';
@@ -9,63 +9,42 @@ import SettingsScreen from './SettingsScreen';
 import FavouritesScreen from './FavouritesScreen';
 import Selling from './SellingScreen';
 import News from './News';
-import {Colors} from '../config';
-const Tab = createBottomTabNavigator();
-const ACTIVE_TAB_COLOR = '#FF5A5F'
-const INACTIVE_TAB_COLOR = '#aaa'
+import { Colors } from '../config';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Header, Icon } from "@rneui/base";
+
+const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
+
+const ACTIVE_TAB_COLOR = '#FF5A5F';
+const INACTIVE_TAB_COLOR = '#aaa';
 
 const headerStyles = {
-  headerTintColor: '#000',
-  headerStyle: {
-    borderBottomWidth: 0,
-    backgroundColor: '#FF385C',
-    shadowColor: '#000',
-    shadowOpacity: 0.25,
-    shadowRadius: 20,
-    shadowOffset: { width: 0, height: 0 }
-  }
-}
-
-
-// Define your Header component here
-const MyHeader = () => {
-  return (
-    <Header
-      backgroundImageStyle={{}}
-      barStyle='default'
-      centerComponent={{
-        text: "BROKER-LINK",
-        // color option rgba(251, 225, 4, 0.9)
-        style: { color: "#fff", fontSize: 20, fontWeight: 'bold' },
-      
-      }}
-      centerContainerStyle={{}}
-      leftComponent={{ icon: "menu", color: "#fff" }}
-      leftContainerStyle={{}}
-      linearGradientProps={{ colors: ['red', 'pink'],
-      start: { x: 0, y: 0.5 },
-      end: { x: 1, y: 0.5 },}}
-      placement="center"
-      rightComponent={{ icon: "home", color: "#fff" }}
-      rightContainerStyle={{}}
-      statusBarProps={{}}
-      backgroundColor= {Colors.airGreen}
-          />
-  );
+  headerShown: false, // Hide the header
 };
 
+const CustomDrawerContent = ({ navigation }) => {
+  const handleLogout = () => {
+    // Implement your logout logic here
+    // For example, you can clear authentication tokens or perform other necessary actions.
+    // After logout, you can navigate the user to the login screen or perform any other required behavior.
+    // navigation.navigate('Login'); // Replace 'Login' with your actual login screen route.
+  };
 
-
-
-
+  return (
+    <View style={styles.drawerContainer}>
+      <TouchableOpacity onPress={() => navigation.navigate('Assignment')}>
+        <Text style={styles.drawerItem}>Assignment Sales</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleLogout}>
+        <Text style={styles.drawerItem}>Logout</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const TabNavigator = () => {
   return (
     <SafeAreaProvider>
-      {/* Add the Header component */}
-      <MyHeader />
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
@@ -83,8 +62,10 @@ const TabNavigator = () => {
             }
             return <Ionicons name={iconName} size={size} color={Colors.black} />;
           },
-          headerShown: false,
           ...headerStyles,
+          headerStyle: {
+            backgroundColor: Colors.airGreen // Change this to your desired header color
+          },
         })}
         tabBarOptions={{
           activeTintColor: 'black', // Set the active icon color
@@ -101,11 +82,12 @@ const TabNavigator = () => {
   );
 };
 
-
-
-
 export const HomeScreen = () => {
-  return <TabNavigator />;
+  return (
+    <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
+      <Drawer.Screen name="BROKER-LINK" component={TabNavigator} />
+    </Drawer.Navigator>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -121,6 +103,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
-  
+  drawerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  drawerItem: {
+    fontSize: 18,
+    marginVertical: 10,
+  },
 });
+
 export default HomeScreen;

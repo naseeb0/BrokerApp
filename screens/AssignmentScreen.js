@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors } from "../config";
 const windowWidth = Dimensions.get('window').width;
 
-const RecommendationScreen = ({ navigation }) => {
+export const Assignment = ({ navigation }) => {
   const [data, setData] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -21,7 +21,7 @@ const RecommendationScreen = ({ navigation }) => {
       const apiResponse = await response.json();
   
       if (apiResponse.data && Array.isArray(apiResponse.data.results)) {
-        const filteredData = apiResponse.data.results.filter(item => item.status === "Upcoming");
+        const filteredData = apiResponse.data.results.filter(item => item.status === "Selling");
   
         const simplifiedData = filteredData.map(item => {
           let imageUrl = ""; // Initialize imageUrl
@@ -310,4 +310,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RecommendationScreen;
+export default Assignment;
