@@ -4,7 +4,7 @@ import { Picker } from "@react-native-picker/picker";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors } from "../config";
 const windowWidth = Dimensions.get('window').width;
-
+// I AM WORKING OUT
 const Selling = ({ navigation }) => {
   const [data, setData] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
