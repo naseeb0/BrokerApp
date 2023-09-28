@@ -133,7 +133,7 @@ if (Array.isArray(item.image) && item.image.length > 0) {
           <Text style={styles.cardType}>{cardData.project_type}</Text>
           {/* <Text style={styles.priceInfo}>{cardData.price_info}</Text> */}
           <Text style={styles.project_address}>{cardData.project_address}</Text>
-          <Text style={styles.project_address}>{cardData.city.name}</Text>
+          <Text style={styles.city_name}>{cardData.city.name}</Text>
         </TouchableOpacity>
       ))}
     </View>
@@ -233,6 +233,14 @@ const styles = StyleSheet.create({
     fontFamily: "UberMoveBold",
   },
   cardType: {
+    fontSize: 13,
+    // fontWeight: "bold",
+    // color: Colors.airGreen,
+    fontFamily: "AirbnbCerealBook",
+    marginBottom:1
+    
+  },
+  city_name: {
     fontSize: 13,
     fontWeight: "bold",
     color: Colors.airGreen,
