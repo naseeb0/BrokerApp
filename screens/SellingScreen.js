@@ -4,7 +4,7 @@ import { Picker } from "@react-native-picker/picker";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors } from "../config";
 const windowWidth = Dimensions.get('window').width;
-
+// I AM WORKING OUT
 const Selling = ({ navigation }) => {
   const [data, setData] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
@@ -17,23 +17,26 @@ const Selling = ({ navigation }) => {
 
   const fetchEventData = async () => {
     try {
-      const response = await fetch("https://api.homebaba.ca/api/pre-constructions-share/");
+      const response = await fetch("https://api.condomonk.ca/api/preconstructions/");
       const apiResponse = await response.json();
-  
-      if (apiResponse.data && Array.isArray(apiResponse.data.results)) {
-        const filteredData = apiResponse.data.results.filter(item => item.status === "Selling");
-  
+      console.log(apiResponse.results);
+      if (apiResponse.results && Array.isArray(apiResponse.results)) {
+        const filteredData = apiResponse.results.filter(item => item.status === "Upcoming");
+        console.log("START HERE");
+        console.log(filteredData);
         const simplifiedData = filteredData.map(item => {
-          let imageUrl = ""; // Initialize imageUrl
-        
-          if (Array.isArray(item.images) && item.images.length > 0) {
-            imageUrl = item.images[0].split(",")[0].trim(); // Extract URL before the comma
-          } else {
-            imageUrl = "https://static.vecteezy.com/system/resources/previews/021/282/086/original/coming-soon-banner-icon-in-flat-style-promotion-label-illustration-on-isolated-background-open-poster-sign-business-concept-vector.jpg"; // Assign a specific URL when images array is empty
-          }
+          let imageUrl;
+
+if (Array.isArray(item.image) && item.image.length > 0) {
+  imageUrl = item.image[0].image;
+  console.log(imageUrl); // Access the correct property and use the first image in the array
+} else {
+  imageUrl = "https://static.vecteezy.com/system/resources/previews/021/282/086/original/coming-soon-banner-icon-in-flat-style-promotion-label-illustration-on-isolated-background-open-poster-sign-business-concept-vector.jpg";
+}
+
           console.log(typeof(item.images));
           return {
-            allimg: item.images,
+            allimg: item.image,
             images: imageUrl,
             project_name: item.project_name,
             project_type: item.project_type,
@@ -130,7 +133,7 @@ const Selling = ({ navigation }) => {
           <Text style={styles.cardType}>{cardData.project_type}</Text>
           {/* <Text style={styles.priceInfo}>{cardData.price_info}</Text> */}
           <Text style={styles.project_address}>{cardData.project_address}</Text>
-          <Text style={styles.project_address}>{cardData.city.name}</Text>
+          <Text style={styles.city_name}>{cardData.city.name}</Text>
         </TouchableOpacity>
       ))}
     </View>
@@ -230,6 +233,14 @@ const styles = StyleSheet.create({
     fontFamily: "UberMoveBold",
   },
   cardType: {
+    fontSize: 13,
+    // fontWeight: "bold",
+    // color: Colors.airGreen,
+    fontFamily: "AirbnbCerealBook",
+    marginBottom:1
+    
+  },
+  city_name: {
     fontSize: 13,
     fontWeight: "bold",
     color: Colors.airGreen,

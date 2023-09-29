@@ -5,22 +5,15 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors } from "../config";
 const windowWidth = Dimensions.get('window').width;
 
-
-const Selling = ({ navigation }) => {
+const RecommendationScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [isFavorite, setIsFavorite] = useState(false);
-  const toggleFavorite = () => {
-    setIsFavorite(prevState => !prevState);
-  };
 
-  const filterDataByCity = (city) => {
-    if (city === "") {
-      return data;
-    }
-    return data.filter(item => item.city.name === city);
-  };
+//Body Filteration by QUERY
+  const [filteredItems, setFilteredItems] = useState([]); // Filtered data based on search query
+
 
   const fetchEventData = async () => {
     try {
@@ -64,11 +57,58 @@ const Selling = ({ navigation }) => {
       console.error("Error fetching data:", error);
     }
   };
+
+
+  const filterDataByQuery = (query) => {
+    if (query === "") {
+      return data; // If the query is empty, return the original data
+    }
+  
+    const lowercaseQuery = query.toLowerCase(); // Convert the query to lowercase for case-insensitive search
+  
+    return data.filter((item) => {
+      const projectName = item.project_name.toLowerCase(); // Convert project name to lowercase
+      const city = item.city ? item.city.name.toLowerCase() : ''; // Check if item.city exists and convert to lowercase
+  
+      // Check if project name contains the query or if city name contains the query
+      const isProjectMatch = projectName.includes(lowercaseQuery);
+      const isCityMatch = city.includes(lowercaseQuery);
+  
+      return isProjectMatch || isCityMatch;
+    });
+  };
+  
+  
+  useEffect(() => {
+    console.log("Data:", data); // Check if data is loaded
+    const filtered = filterDataByQuery(searchQuery);
+    console.log("Filtered Data:", filtered); // Check the filtered data
+    setFilteredItems(filtered);
+  }, [searchQuery, data]);
+
+
+
+
+
+  
+  const toggleFavorite = () => {
+    setIsFavorite(prevState => !prevState);
+  };
+
+  const filterDataByCity = (city) => {
+    if (city === "") {
+      return data;
+    }
+    return data.filter(item => item.city && item.city.name.toLowerCase() === city.toLowerCase());
+  };
+  
+
+
+
   useEffect(() => {
     fetchEventData();
   }, []);
   const renderRow = ({ item }) => (
-    
     <View style={styles.row}>
       {item.map(cardData => (
         <TouchableOpacity
@@ -90,6 +130,7 @@ const Selling = ({ navigation }) => {
           <Text style={styles.cardType}>{cardData.project_type}</Text>
           {/* <Text style={styles.priceInfo}>{cardData.price_info}</Text> */}
           <Text style={styles.project_address}>{cardData.project_address}</Text>
+          <Text style={styles.project_address}>{cardData.city.name}</Text>
         </TouchableOpacity>
       ))}
     </View>
@@ -105,24 +146,40 @@ const Selling = ({ navigation }) => {
   };
 
   const filteredData = filterDataByCity(selectedCity);
-  const rows = groupDataIntoRows(filteredData, 2);
 
+//FEAT 1 
+
+const handleSearch = (text) => {
+  setSearchQuery(text);
+};
+
+//FEAT1 END
+
+  // FEAT1
+  const filteredDataWithSearch = searchQuery
+    ? filterDataByQuery(searchQuery)
+    : filteredData;
+    //FEAT1 END
+
+    // PREVIOUS BEFORE FEAT 1 const rows = groupDataIntoRows(filteredData, 2);
+    const rows = groupDataIntoRows(filteredDataWithSearch, 2);
   return (
-    <View style={[styles.container, {marginTop:30}]}>
-    <View style={styles.filterContainer}>
-        <View style={styles.searchContainer}>
-          <Icon name="magnify" size={24} color="#999" style={styles.searchIcon} />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search..."
-            value={searchQuery}
-            onChangeText={text => setSearchQuery(text)}
-          />
-        </View>
-        <TouchableOpacity style={styles.filterIconContainer} onPress={() => {/* Add your filter logic here */}}>
-          <Icon name="filter" size={24} color="#999" style={styles.filterIcon} />
-        </TouchableOpacity>
+    <View style={[styles.container]}>
+{/* Search bar */}
+<View style={styles.searchContainer}>
+        <Icon name="magnify" style={styles.searchIcon} />
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search by City or Project Name"
+          onChangeText={handleSearch}
+          value={searchQuery}
+        />
       </View>
+
+
+
+
+
     <FlatList
       data={rows}
       renderItem={renderRow}
@@ -198,12 +255,12 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   searchContainer: {
-    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#F5F5F5",
     borderRadius: 8,
     paddingLeft: 8,
+    marginBottom: 8,
   },
   searchIcon: {
     marginRight: 8,
@@ -253,4 +310,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Selling;
+export default RecommendationScreen;

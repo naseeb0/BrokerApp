@@ -6,6 +6,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import DisplayScreen from '../screens/DisplayScreen';
 import MapsScreen from '../screens/MapsScreen';
 import DetailsScreen from '../screens/DetailsScreen';
+import Assignment from '../screens/AssignmentScreen';
 import { Colors } from '../config';
 const Stack = createStackNavigator();
 
@@ -33,6 +34,7 @@ export const AppStack = () => {
       <Stack.Screen name='Admin' component={AdminHome} />
       <Stack.Screen name='DisplayScreen' component={DisplayScreen} />
       <Stack.Screen name='MapsScreen' component={MapsScreen} />
+      <Stack.Screen name='Assignment' component={Assignment} />
     </Stack.Navigator>
   );
 };
