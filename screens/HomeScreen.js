@@ -176,7 +176,9 @@ const TabNavigator = () => {
 };
 const AssignmentStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+   
+    >
       <Stack.Screen
         name="Assignment"
         component={AssignmentScreen}
@@ -191,8 +193,24 @@ const AssignmentStack = () => {
 export const HomeScreen = () => {
   return (
     <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="BROKER-LINK" component={TabNavigator} />
-      <Drawer.Screen name="Assignment" component={AssignmentSalesScreen} />
+      <Drawer.Screen name="BROKER-LINK" component={TabNavigator} options={{
+      headerStyle: {
+        backgroundColor: Colors.airGreen,
+
+      },
+      headerTitleStyle:{
+        color:Colors.white,
+      },
+      headerTintColor:Colors.white,
+    }}/>
+      <Drawer.Screen name="Assignment" component={AssignmentSalesScreen} options={{
+      headerStyle: {
+        backgroundColor: Colors.airGreen, // Change 'your-desired-color' to your desired header color
+      }, headerTitleStyle:{
+        color:Colors.white,
+      },
+      headerTintColor:Colors.white,
+    }}/>
     </Drawer.Navigator>
   );
 };
