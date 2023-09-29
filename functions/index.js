@@ -7,8 +7,7 @@ admin.initializeApp();
 // Reference to the Firestore collection
 const usersCollection = admin.firestore().collection("users");
 
-// Firebase Cloud Function to find the "name" field value by document ID
-exports.fetchUserNameById = functions.https.onRequest(async (req, res) => {
+exports.fetchUserFieldsById = functions.https.onRequest(async (req, res) => {
   try {
     const userId = req.query.userId; //
 
@@ -16,13 +15,21 @@ exports.fetchUserNameById = functions.https.onRequest(async (req, res) => {
 
     if (userDoc.exists) {
       const userData = userDoc.data();
+      const userFields = {};
+
       if (Object.prototype.hasOwnProperty.call(userData, "name")) {
-        const userName = userData.name;
-        res.status(200).json({userName});
-      } else {
-        res.status(400).json({error: "User document"+
-        "does not contain a \"name\" field."});
+        userFields.name = userData.name;
       }
+
+      if (Object.prototype.hasOwnProperty.call(userData, "email")) {
+        userFields.email = userData.email;
+      }
+
+      if (Object.prototype.hasOwnProperty.call(userData, "join")) {
+        userFields.join = userData.join;
+      }
+
+      res.status(200).json(userFields);
     } else {
       res.status(404).json({error: "User document not found."});
     }
@@ -31,4 +38,3 @@ exports.fetchUserNameById = functions.https.onRequest(async (req, res) => {
     res.status(500).json({error: "Internal server error."});
   }
 });
-
