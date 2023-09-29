@@ -45,8 +45,18 @@ async function fetchUserNameById(userId) {
   }
 }
 
-const CustomDrawerContent = ({ navigation }) => {
+const CustomDrawerItem = ({ label, icon, active, onPress }) => {
+  return (
+    <TouchableOpacity onPress={onPress} style={[styles.drawerItem, active && styles.activeItem]}>
+      <Ionicons name={icon} size={24} color={active ? Colors.airGreen : 'black'} />
+      <Text style={[styles.drawerItemText, active && styles.activeItemText]}>{label}</Text>
+    </TouchableOpacity>
+  );
+};
+
+const CustomDrawerContent = ({ navigation, state }) => {
   const [displayName, setDisplayName] = useState(null);
+  const [email, setEmail] = useState(null); // Add state for email
 
   useEffect(() => {
     // Check if the user is authenticated
@@ -56,30 +66,29 @@ const CustomDrawerContent = ({ navigation }) => {
     if (currentUser) {
       const userId = currentUser.uid;
 
-      // Define a function to fetch user name
-      const fetchUserName = async () => {
+      // Define a function to fetch user data (name and email)
+      const fetchUserData = async () => {
         try {
           console.log("TRYING..............");
           const response = await axios.get(
-            `https://us-central1-homebaba-de874.cloudfunctions.net/fetchUserNameById?userId=${userId}`
+            `https://us-central1-homebaba-de874.cloudfunctions.net/fetchUserFieldsById?userId=${userId}`
           );
           console.log('API Response:', response); // Log the entire response
 
-          if (response.status === 200 && response.data.userName) {
-            // Set displayName to the fetched user name
-            setDisplayName(response.data.userName);
-            console.log("USER NAME");
-            console.log(response.data.userName);
+          if (response.status === 200) {
+            // Set displayName and email to the fetched data
+            setDisplayName(response.data.name);
+            setEmail(response.data.email); // Set email here
           } else {
             console.log('Error:', response.data.error || 'User document not found.');
           }
         } catch (error) {
-          console.error('Error fetching user name:', error);
+          console.error('Error fetching user data:', error);
         }
       };
 
-      // Call the fetchUserName function to fetch and set the user name
-      fetchUserName();
+      // Call the fetchUserData function to fetch and set the user data
+      fetchUserData();
     }
   }, []);
 
@@ -91,24 +100,34 @@ const CustomDrawerContent = ({ navigation }) => {
       })
       .catch((error) => console.log('Error logging out: ', error));
   };
+
   return (
     <View style={styles.drawerContainer}>
       <View style={styles.drawerHeaderContainer}>
-      <Text style={styles.drawerHi}>Hi</Text>
-        <Text style={styles.drawerDisplayName}>{displayName}</Text>
-      </View>
-      <TouchableOpacity onPress={() => navigation.navigate('Assignment')}>
-        <Text style={styles.drawerItem}>Assignment Sales</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleLogout}>
-        <View style={styles.logoutContainer}>
-          <Ionicons name="ios-log-out" size={24} color="red" />
-          <Text style={styles.drawerItem}>Logout</Text>
-        </View>
-      </TouchableOpacity>
+  <Text style={styles.drawerHi}>Hi,</Text>
+  <Text style={styles.drawerDisplayName}>{displayName}</Text>
+  {email && <Text style={styles.drawerEmail}>{email}</Text>}
+
+</View>
+      <CustomDrawerItem
+        label="Home"
+        icon="ios-home"
+        active={state.routeNames[state.index] === 'BROKER-LINK'}
+        onPress={() => navigation.navigate('BROKER-LINK')}
+      />
+      <CustomDrawerItem
+        label="Assignment Sales"
+        icon="ios-paper"
+        active={state.routeNames[state.index] === 'Assignment'}
+        onPress={() => navigation.navigate('Assignment')}
+      />
+      <CustomDrawerItem
+        label="Logout"
+        icon="ios-log-out"
+        onPress={handleLogout}
+      />
     </View>
   );
-
 };
 
 
@@ -159,55 +178,54 @@ export const HomeScreen = () => {
     </Drawer.Navigator>
   );
 };
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f9f9f9',
-    marginTop: 20, // Add proper margin to the top
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
   drawerContainer: {
     flex: 1,
     alignItems: 'flex-start',
-    // Center horizontally
-    justifyContent: 'space-between', // Arrange items vertically with space between
-    paddingHorizontal: 60,
+    justifyContent: 'flex-start',
     paddingTop: 50,
-    paddingBottom: 30, // Add padding to the bottom
+    paddingHorizontal: 20, // Reduced horizontal padding
     backgroundColor: '#fff',
+  },
+  drawerHeaderContainer: {
+    flexDirection: 'column', // Change to column layout
+    alignItems: 'flex-start', // Align text to the start of the column
+    marginBottom: 20,
+  },
+  drawerEmail: {
+    fontSize: 18, // Adjust the font size as needed
+    color: Colors.black,
+    marginTop: 5, // Add margin-top to separate from displayName
+    flexWrap: 'wrap', // Allow text to wrap to the next line if it's too long
   },
   drawerHi: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginTop: 10,
-    textAlign: 'center',
+    marginRight: 10,
+    color:Colors.black,
   },
   drawerDisplayName: {
+    marginTop:15,
     fontSize: 30,
     fontWeight: 'bold',
-    marginTop: 10,
-    textAlign: 'center',
-  }, 
-  logoutContainer: {
-    flexDirection: 'row', // Arrange items in a row
-    alignItems: 'center', // Center items vertically
-    marginVertical: 10,
-    fontWeight: 'bold', // Add bold font weight
-    color: 'blue', // Change the text color
+    color:Colors.black,
   },
   drawerItem: {
-    fontSize: 18,
+    flexDirection: 'row',
+    alignItems: 'center',
     marginVertical: 10,
-    fontWeight: 'bold', // Add bold font weight
-    color: 'blue', // Change the text color
   },
+  drawerItemText: {
+    fontSize: 18,
+    marginLeft: 10,
+  },
+  activeItem: {
+  },
+  activeItemText: {
+    fontWeight: 'bold',
+    color: Colors.airGreen,
+  },
+  
 });
 
 
