@@ -1,34 +1,38 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AllListingsScreen from './AssignmentTabs/AllListingsScreen';
+import AddScreen from './AssignmentTabs/AddScreen';
+import YourListingsScreen from './AssignmentTabs/YourLIstingsScreen';
+
+
+const Tab = createBottomTabNavigator();
 
 const AssignmentScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Assignment Screen</Text>
-      <Text style={styles.description}>This is a simple Assignment Screen.</Text>
-      {/* Add your assignment-related content here */}
-    </View>
+    <Tab.Navigator>
+      <Tab.Screen
+        name="All Listings"
+        component={AllListingsScreen}
+        options={{
+          headerShown: false, // Hide the header for All Listings
+        }}
+      /> 
+      <Tab.Screen
+        name="Add"
+        component={AddScreen}
+        options={{
+          headerShown: false, // Hide the header for Add
+        }}
+      />
+      <Tab.Screen
+        name="Your Listings"
+        component={YourListingsScreen}
+        options={{
+          headerShown: false, // Hide the header for Your Listings
+        }}
+      />
+    </Tab.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  description: {
-    fontSize: 18,
-    textAlign: 'center',
-    marginBottom: 20,
-    color: '#555',
-  },
-});
 
 export default AssignmentScreen;

@@ -15,8 +15,12 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { signOut } from 'firebase/auth';
 import { auth } from '../config';
 import axios from 'axios';
+import { createStackNavigator } from '@react-navigation/stack';
+import AssignmentSalesScreen from './AssignmentSalesScreen';
+
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator(); // Create a stack navigator
 
 const ACTIVE_TAB_COLOR = '#FF5A5F';
 const INACTIVE_TAB_COLOR = '#aaa';
@@ -170,14 +174,29 @@ const TabNavigator = () => {
     </SafeAreaProvider>
   );
 };
-
+const AssignmentStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Assignment"
+        component={AssignmentScreen}
+        options={{
+          headerShown: false, // Hide the header for AssignmentScreen
+        }}
+      />
+      {/* Add more screens and their navigation options within the AssignmentStack if needed */}
+    </Stack.Navigator>
+  );
+};
 export const HomeScreen = () => {
   return (
     <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
       <Drawer.Screen name="BROKER-LINK" component={TabNavigator} />
+      <Drawer.Screen name="Assignment" component={AssignmentSalesScreen} />
     </Drawer.Navigator>
   );
 };
+
 const styles = StyleSheet.create({
   drawerContainer: {
     flex: 1,
