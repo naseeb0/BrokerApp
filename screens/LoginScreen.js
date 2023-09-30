@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 8,
-    backgroundColor: Colors.homebaba,
+    backgroundColor: Colors.airGreen,
     padding: 10,
     borderRadius: 8
     //add color opacity to background color

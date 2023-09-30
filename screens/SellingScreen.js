@@ -21,7 +21,7 @@ const Selling = ({ navigation }) => {
       const apiResponse = await response.json();
       console.log(apiResponse.results);
       if (apiResponse.results && Array.isArray(apiResponse.results)) {
-        const filteredData = apiResponse.results.filter(item => item.status === "Upcoming");
+        const filteredData = apiResponse.results.filter(item => item.status === "Selling");
         console.log("START HERE");
         console.log(filteredData);
         const simplifiedData = filteredData.map(item => {
