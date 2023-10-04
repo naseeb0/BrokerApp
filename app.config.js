@@ -4,6 +4,8 @@ export default {
   expo: {
     name: 'BrokerLink',
     slug: 'brokerlink',
+    name: 'BrokerLink',
+    slug: 'broker-link',
     privacy: 'public',
     platforms: ['ios', 'android'],
     version: '0.15.0',
@@ -22,18 +24,17 @@ export default {
       supportsTablet: true
     },
     extra: {
-      apiKey: "AIzaSyAT1EfWI2IMKrGM_vM2bVoAX8c0nGpq1nQ",
+      apiKey: "AIzaSyDZuWuz0h-uAhFrssQQm3Mbi6StZtMeiUs",
 
-  authDomain: "homebaba-de874.firebaseapp.com",
+  authDomain: "eventsnet-fa0f0.firebaseapp.com",
 
-  projectId: "homebaba-de874",
+  projectId: "eventsnet-fa0f0",
 
-  storageBucket: "homebaba-de874.appspot.com",
+  storageBucket: "eventsnet-fa0f0.appspot.com",
 
-  messagingSenderId: "9451773000",
+  messagingSenderId: "901264439913",
 
-  appId: "1:9451773000:web:936d894ccc99401970cc7d"
-
+  appId: "1:901264439913:web:b0c1eb2fcfefe9ecfd40f8"
 
 
     }
