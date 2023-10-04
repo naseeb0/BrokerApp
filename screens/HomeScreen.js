@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { View, Text, StyleSheet, TouchableOpacity,Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import EventsScreen from './EventsScreen';
-import RecommendationScreen from './RecommendationScreen';
+import UpcomingScreen from './RecommendationScreen';
 import SettingsScreen from './SettingsScreen';
 import FavouritesScreen from './FavouritesScreen';
 import Selling from './SellingScreen';
@@ -166,7 +166,7 @@ const TabNavigator = () => {
         }}
       >
         <Tab.Screen name="Selling" component={Selling} options={{ tabBarLabel: "Selling" }} />
-        <Tab.Screen name="Upcoming" component={RecommendationScreen} options={{ tabBarLabel: "Upcoming" }} />
+        <Tab.Screen name="Upcoming" component={UpcomingScreen} options={{ tabBarLabel: "Upcoming" }} />
         <Tab.Screen name="Events" component={EventsScreen} options={{ tabBarLabel: "Events" }} />
         <Tab.Screen name="News" component={News} options={{ tabBarLabel: "News" }} />
         <Tab.Screen name="Favourites" component={FavouritesScreen} options={{ tabBarLabel: "Favourites" }} />
@@ -176,7 +176,9 @@ const TabNavigator = () => {
 };
 const AssignmentStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+   
+    >
       <Stack.Screen
         name="Assignment"
         component={AssignmentScreen}
@@ -191,8 +193,24 @@ const AssignmentStack = () => {
 export const HomeScreen = () => {
   return (
     <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="BROKER-LINK" component={TabNavigator} />
-      <Drawer.Screen name="Assignment" component={AssignmentSalesScreen} />
+      <Drawer.Screen name="BROKER-LINK" component={TabNavigator} options={{
+      headerStyle: {
+        backgroundColor: Colors.airGreen,
+
+      },
+      headerTitleStyle:{
+        color:Colors.white,
+      },
+      headerTintColor:Colors.white,
+    }}/>
+      <Drawer.Screen name="Assignment" component={AssignmentSalesScreen} options={{
+      headerStyle: {
+        backgroundColor: Colors.airGreen, // Change 'your-desired-color' to your desired header color
+      }, headerTitleStyle:{
+        color:Colors.white,
+      },
+      headerTintColor:Colors.white,
+    }}/>
     </Drawer.Navigator>
   );
 };

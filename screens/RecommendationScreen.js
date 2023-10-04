@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors } from "../config";
 const windowWidth = Dimensions.get('window').width;
 
-const RecommendationScreen = ({ navigation }) => {
+const UpcomingScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -310,4 +310,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RecommendationScreen;
+export default UpcomingScreen;
