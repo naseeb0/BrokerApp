@@ -2,17 +2,17 @@ import 'dotenv/config';
 
 export default {
   expo: {
-    name: 'EventNetwork',
-    slug: 'events-app',
+    name: 'BrokerLink',
+    slug: 'brokerlink',
     privacy: 'public',
     platforms: ['ios', 'android'],
     version: '0.15.0',
     orientation: 'portrait',
-    icon: './assets/HOMMEEE.png',
+    icon: './assets/appIcon.png',
     splash: {
       image: './assets/splas.png',
       resizeMode: 'cover',
-      backgroundColor: '#FF0000'
+      backgroundColor: '#008489'
     },
     updates: {
       fallbackToCacheTimeout: 0

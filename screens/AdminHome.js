@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text, StyleSheet, TextInput, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import RecommendationScreen from './RecommendationScreen';
+import UpcomingScreen from './RecommendationScreen';
 import SettingsScreen from './SettingsScreen';
 import AdminCRUD from './AdminCRUD';
 const Tab = createBottomTabNavigator();
@@ -39,7 +39,7 @@ const TabNavigator = () => {
     }}
     >
       <Tab.Screen name="HOME" component={AdminCRUD} />
-      <Tab.Screen name="Recommendation" component={RecommendationScreen} />
+      <Tab.Screen name="Recommendation" component={UpcomingScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
       
     </Tab.Navigator>
