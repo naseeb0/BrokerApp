@@ -1,0 +1,42 @@
+npm ERR! code ERESOLVE
+npm ERR! ERESOLVE could not resolve
+npm ERR! 
+npm ERR! While resolving: react-native@0.69.12
+npm ERR! Found: react@18.2.0
+npm ERR! node_modules/react
+npm ERR!   react@"^18.2.0" from the root project
+npm ERR!   peer react@">=16.3.0" from @callstack/react-theme-provider@3.0.8
+npm ERR!   node_modules/@callstack/react-theme-provider
+npm ERR!     @callstack/react-theme-provider@"^3.0.8" from react-native-paper@5.9.1
+npm ERR!     node_modules/react-native-paper
+npm ERR!       react-native-paper@"^5.9.1" from the root project
+npm ERR!   33 more (@react-native-community/geolocation, ...)
+npm ERR! 
+npm ERR! Could not resolve dependency:
+npm ERR! peer react@"18.0.0" from react-native@0.69.12
+npm ERR! node_modules/react-native
+npm ERR!   react-native@"^0.69.4" from the root project
+npm ERR!   peer react-native@"^0.0.0-0 || 0.60 - 0.71 || 1000.0.0" from @react-native-async-storage/async-storage@1.17.12
+npm ERR!   node_modules/@react-native-async-storage/async-storage
+npm ERR!     @react-native-async-storage/async-storage@"~1.17.3" from the root project
+npm ERR!   26 more (@react-native-community/cli, ...)
+npm ERR! 
+npm ERR! Conflicting peer dependency: react@18.0.0
+npm ERR! node_modules/react
+npm ERR!   peer react@"18.0.0" from react-native@0.69.12
+npm ERR!   node_modules/react-native
+npm ERR!     react-native@"^0.69.4" from the root project
+npm ERR!     peer react-native@"^0.0.0-0 || 0.60 - 0.71 || 1000.0.0" from @react-native-async-storage/async-storage@1.17.12
+npm ERR!     node_modules/@react-native-async-storage/async-storage
+npm ERR!       @react-native-async-storage/async-storage@"~1.17.3" from the root project
+npm ERR!     26 more (@react-native-community/cli, ...)
+npm ERR! 
+npm ERR! Fix the upstream dependency conflict, or retry
+npm ERR! this command with --force or --legacy-peer-deps
+npm ERR! to accept an incorrect (and potentially broken) dependency resolution.
+npm ERR! 
+npm ERR! 
+npm ERR! For a full report see:
+npm ERR! /Users/naseebdangi/.npm/_logs/2023-10-04T19_34_11_409Z-eresolve-report.txt
+
+npm ERR! A complete log of this run can be found in: /Users/naseebdangi/.npm/_logs/2023-10-04T19_34_11_409Z-debug-0.log
