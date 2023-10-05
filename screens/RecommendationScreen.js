@@ -22,7 +22,8 @@ const UpcomingScreen = ({ navigation }) => {
   
       if (apiResponse.data && Array.isArray(apiResponse.data.results)) {
         const filteredData = apiResponse.data.results.filter(item => item.status === "Upcoming");
-  
+        console.log("START HERE");
+        console.log(filteredData);
         const simplifiedData = filteredData.map(item => {
           let imageUrl = ""; // Initialize imageUrl
         

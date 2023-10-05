@@ -17,6 +17,7 @@ import { auth } from '../config';
 import axios from 'axios';
 import { createStackNavigator } from '@react-navigation/stack';
 import AssignmentSalesScreen from './AssignmentSalesScreen';
+import { StatusBar } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -192,26 +193,29 @@ const AssignmentStack = () => {
 };
 export const HomeScreen = () => {
   return (
+    <>
+    <StatusBar barStyle="dark-content" backgroundColor={'white'} />
     <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
       <Drawer.Screen name="BROKER-LINK" component={TabNavigator} options={{
       headerStyle: {
-        backgroundColor: Colors.airGreen,
+        backgroundColor: 'white',
 
       },
       headerTitleStyle:{
-        color:Colors.white,
+        color:'black',
       },
-      headerTintColor:Colors.white,
+      headerTintColor:'black',
     }}/>
       <Drawer.Screen name="Assignment" component={AssignmentSalesScreen} options={{
       headerStyle: {
-        backgroundColor: Colors.airGreen, // Change 'your-desired-color' to your desired header color
+        backgroundColor: 'white', // Change 'your-desired-color' to your desired header color
       }, headerTitleStyle:{
-        color:Colors.white,
+        color:'black',
       },
-      headerTintColor:Colors.white,
+      headerTintColor:'black',
     }}/>
     </Drawer.Navigator>
+    </>
   );
 };
 
