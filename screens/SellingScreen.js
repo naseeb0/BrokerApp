@@ -17,47 +17,49 @@ const SellingScreen = ({ navigation }) => {
 
   const fetchEventData = async () => {
     try {
-      const response = await fetch("https://api.homebaba.ca/api/pre-constructions-share/");
+      const response = await fetch('https://api.condomonk.ca/api/preconstructions/?page_size=100');
       const apiResponse = await response.json();
   
-      if (apiResponse.data && Array.isArray(apiResponse.data.results)) {
-        const filteredData = apiResponse.data.results.filter(item => item.status === "Selling");
-        console.log("START HERE");
-        console.log(filteredData);
+      if (Array.isArray(apiResponse.results)) {
+        const filteredData = apiResponse.results.filter(item => item.status === "Selling");
+  
         const simplifiedData = filteredData.map(item => {
           let imageUrl = ""; // Initialize imageUrl
         
-          if (Array.isArray(item.images) && item.images.length > 0) {
-            imageUrl = item.images[0].split(",")[0].trim(); // Extract URL before the comma
+          if (Array.isArray(item.image) && item.image.length > 0) {
+            imageUrl = item.image[0].image // Extract URL before the comma
           } else {
             imageUrl = "https://static.vecteezy.com/system/resources/previews/021/282/086/original/coming-soon-banner-icon-in-flat-style-promotion-label-illustration-on-isolated-background-open-poster-sign-business-concept-vector.jpg"; // Assign a specific URL when images array is empty
           }
           console.log(typeof(item.images));
+  
           return {
             allimg: item.images,
             images: imageUrl,
             project_name: item.project_name,
             project_type: item.project_type,
-            price_info: (item.price_starting_from === 0.0) 
-            ? "TBD"
-            : `$${item.price_starting_from}`,
+            price_info: (item.price_starting_from === 0.0) ? "TBD" : `$${item.price_starting_from}`,
             project_address: item.project_address,
             postalcode: item.postalcode,
-            occupancy:item.occupancy,
-            city:item.city,
-            developer:item.developer,
-            latitude:item.latitude,
-            longitude:item.longitude,
-            
+            occupancy: item.occupancy,
+            city: item.city,
+            developer: item.developer,
+            latitude: item.latitude,
+            longitude: item.longitude,
           };
         });
   
         setData(simplifiedData);
+      } else {
+        console.error("Data not found or not in the expected format.");
+        // You might want to handle this case by setting an error state or displaying a message to the user.
       }
     } catch (error) {
       console.error("Error fetching data:", error);
+      // Handle the error appropriately, e.g., set an error state or display an error message.
     }
   };
+  
 
 
   const filterDataByQuery = (query) => {
