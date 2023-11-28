@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Dimensions, TextInput } from "react-native";
-import { Picker } from "@react-native-picker/picker";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors } from "../config";
 const windowWidth = Dimensions.get('window').width;
@@ -17,7 +16,7 @@ const SellingScreen = ({ navigation }) => {
 
   const fetchEventData = async () => {
     try {
-      const response = await fetch('https://api.condomonk.ca/api/preconstructions/?page_size=100');
+      const response = await fetch('https://api.condomonk.ca/api/preconstructions/?page_size=50');
       const apiResponse = await response.json();
   
       if (Array.isArray(apiResponse.results)) {

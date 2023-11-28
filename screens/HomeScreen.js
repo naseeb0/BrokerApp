@@ -162,7 +162,7 @@ const TabNavigator = () => {
           },
         })}
         tabBarOptions={{
-          activeTintColor: 'black', // Set the active icon color
+          activeTintColor: 'red', // Set the active icon color
           inactiveTintColor: 'gray', // Set the inactive icon color
         }}
       >

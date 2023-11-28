@@ -1,0 +1,27 @@
+{
+  "cli": {
+    "version": ">= 5.4.0"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "channel": "preview"
+    },
+    "production": {
+      "channel": "production"
+    }
+  },
+  "submit": {
+    "production": {
+      "ios":{
+        "appleId":"milan@homebaba.ca",
+        "ascAppId":"6473190634",
+        "appleTeamId":"6LGKG59C2S"
+      }
+    }
+  }
+}
