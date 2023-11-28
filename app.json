@@ -28,7 +28,7 @@
       ]],
     "ios": {
       "bundleIdentifier": "com.naseeb.brokerlink",
-      "buildNumber": "3"
+      "buildNumber": "4"
     },
     "runtimeVersion": {
       "policy": "sdkVersion"
